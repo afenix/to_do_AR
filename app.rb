@@ -24,7 +24,7 @@ get('/tasks/:id/edit') do
   erb(:task_edit)
 end
 
-patch('tasks/:id') do
+patch('/tasks/:id') do
   description = params.fetch("description")
   @task = Task.find(params.fetch("id").to_i())
   @task.update({:description => description})

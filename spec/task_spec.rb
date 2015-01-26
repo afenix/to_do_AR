@@ -2,32 +2,13 @@ require("spec_buddy")
 
 describe(Task) do
 
-  describe("#description") do
-    it("lets you read the description out") do
-      test_task = Task.new({:description => "learn SQL"})
-      expect(test_task.description()).to(eq("learn SQL"))
-    end
-  end
-
-  describe(".all") do
-    it("is empty at first") do
-      expect(Task.all()).to(eq([]))
-    end
-  end
-
-  describe("#save") do
-    it("adds a task to the array of saved tasks") do
-      test_task = Task.new({:description => "learn SQL"})
-      test_task.save()
-      expect(Task.all()).to(eq([test_task]))
-    end
-  end
-
-  describe("#==") do
-    it("is the same task if it has the same description and list ID") do
-      task1 = Task.new({:description => "learn SQL"})
-      task2 = Task.new({:description => "learn SQL"})
-      expect(task1).to(eq(task2))
+  describe(".not_done") do
+    it("will return only tasks that are not yet completed") do
+    test_task1 = Task.create({:description => "Rule the world", :done => false})
+    test_task2 = Task.create({:description => "Master the known universe", :done => false})
+    notdone_tasks = [test_task1, test_task2]
+    test_task3 = Task.create({:description => "Rule my own living room", :done => true})
+    expect(Task.not_done()).to(eq(notdone_tasks))
     end
   end
 end
